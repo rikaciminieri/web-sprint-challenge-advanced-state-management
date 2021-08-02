@@ -37,8 +37,11 @@ export const fetchingFailed = (error) => {
   return { type: FETCHING_FAILED, payload: error };
 };
 
-export const addingSmurf = (name, nickname, position, summary) => {
-  return { type: ADDING_SMURF, payload: {name, nickname, position, summary} };
+export const addingSmurf = (smurf) => {
+  return {
+    type: ADDING_SMURF,
+    payload: { ...smurf, id: Date.now() },
+  };
 };
 
 export const addsErrorMsg = (error) => {

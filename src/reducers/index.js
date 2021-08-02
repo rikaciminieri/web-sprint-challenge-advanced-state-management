@@ -32,9 +32,15 @@ export const reducer = (state = initialState, action) => {
         isLoading: false,
       };
     case ADDING_SMURF:
-      return {};
+      return {
+        ...state,
+        smurfs: [...state.smurfs, action.payload]
+      };
     case ADDS_ERROR_MSG:
-      return {};
+      return {
+        ...state,
+        error: action.payload
+      };
     default:
       return state;
   }
