@@ -1,38 +1,35 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
 
-import AddForm from './components/AddForm';
-import SmurfList from './components/SmurfList';
-import Header from './components/Header';
+import AddForm from "./components/AddForm";
+import SmurfList from "./components/SmurfList";
+import Header from "./components/Header";
 
-import axios from 'axios';
+import { fetchSmurf } from "./actions";
 
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
-const test = "Testing";
+const App = (props) => {
 
-class App extends Component {
-  componentDidMount() {
-    axios.get('http://localhost:3333/smurfs')
-    .then(res => console.log(res))
-    .catch(err => console.log('Axios Error', err));
-  }
-  
-  render() {
-    return (
-      <div className="App">
-        <Header />
+  useEffect(() => {
+    props.fetchSmurf();
+  }, []);
 
-        <main>
-          <SmurfList/>
-          <AddForm/>
-        </main>
-      </div>
-    );
-  }
-}
+  return (
+    <div className="App">
+      <Header />
 
-export default App;
+      <main>
+        <SmurfList />
+        <AddForm />
+      </main>
+    </div>
+  );
+};
+
+
+export default connect(null, { fetchSmurf })(App);
 
 //Task List:
 //1. Connect the fetchSmurfs actions to the App component.
